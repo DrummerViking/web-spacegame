@@ -115,6 +115,34 @@ ctx.fillStyle = 'red';
 //4. and draw a rectangle with these parameters, setting location and size
 ctx.fillRect(0, 0, 200, 200) // x,y,width, height
 */
+class Rectangle {
+    constructor(height, width) {
+        this.name = 'Rectangle';
+        this.height = height;
+        this.width = width;
+    }
+    sayName() {
+        console.log('Hi, I am a ', this.name + '.');
+    }
+    get area() {
+        return this.height * this.width;
+    }
+    set area(value) {
+        this.height = this.width = Math.sqrt(value);
+    }
+}
+
+class Square extends Rectangle {
+    constructor(length) {
+        // Aquí, llama al constructor de la clase padre con las longitudes
+        // previstas para el ancho y la altura de Rectangle
+        super(length, length);
+
+        // Nota: En las clases derivadas, se debe llamar a super() antes de
+        // poder usar 'this'. Salir de esto provocará un error de referencia.
+        this.name = 'Square';
+    }
+}
 
 function loadAsset(path) {
     return new Promise((resolve) => {
@@ -131,9 +159,9 @@ function loadAsset(path) {
 async function run() {
     const heroImg = await loadAsset("./assets/player.png");
     const monsterImg = await loadAsset("./assets/enemyShip.png");
-    
+
     canvas = document.getElementById("myCanvas");
     ctx = canvas.getContext("2d");
-    ctx.drawImage(heroImg, canvas.width/2,canvas.height/2);
-    ctx.drawImage(monsterImg, 0,0);
+    ctx.drawImage(heroImg, canvas.width / 2, canvas.height / 2);
+    ctx.drawImage(monsterImg, 0, 0);
 }
